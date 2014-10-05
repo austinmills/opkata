@@ -1,12 +1,15 @@
 require 'digit'
+require 'parse_result'
 
 class DigitParser
 
+  # Take the entire text and split it into groups of three lines
   def parse_text(text)
     lines = text.split("\n")
     lines.each_slice(3).to_a
   end
 
+  # Take an array of three lines and change it to an array of 9 2D character arrays
   def parse_lines(lines)
     sliced_lines = lines.map { |x| x.chars.each_slice(3).to_a }
 
@@ -17,17 +20,23 @@ class DigitParser
     digits
   end
 
+  # Convert a 2D character array to a number
   def parse_digit(digit)
     Digit.match(digit)
   end
 
+  # Parse an array of three lines representing a set of numbers into a stringified numeric result
+  def build_result(lines)
+    ParseResult.new(parse_lines(lines).inject("") { |value, digit| value + (parse_digit(digit) || '?').to_s })
+  end
+
   def parse(text)
     line_groups = parse_text(text)
-    result = []
+    results = []
     line_groups.each { |x|
-      result << parse_lines(x).inject("") { |value, digit| value + parse_digit(digit).to_s }
+      results << build_result(x)
     }
-    result
+    results
   end
 
 end

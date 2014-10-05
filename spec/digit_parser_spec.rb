@@ -57,7 +57,16 @@ describe 'DigitParser' do
     expect(parser.parse_digit(one_digit)).to eq(1)
     expect(parser.parse_digit(two_digit)).to eq(2)
 
+  end
 
+  it 'should output invalid characters as ?s' do
+    parser  = DigitParser.new
+    lines = ["    _  _     _  _  _  _  _ ",
+             "  ||_| _||_||_ |_   ||_||_|",
+             "  ||_ |_|  | _||_|| ||_| _|"]
+
+    result = parser.build_result(lines)
+    expect(result.digits).to eq('1??456?89')
   end
 
 end
