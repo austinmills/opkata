@@ -15,7 +15,7 @@ class ParseResultSpec
       expect(result.checksum_valid).to eq(false)
     end
 
-    it 'should correctly identify results with ambiguous characters' do
+    it 'should correctly identify results with invalid characters' do
       result = ParseResult.new("86110??36")
       expect(result.all_chars_valid).to eq(false)
       expect(result.checksum_valid).to eq(false)

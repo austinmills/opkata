@@ -57,8 +57,6 @@ class Digit
       NINE => 9
   }
 
-  DIGITS = DIGITS_TO_NUMBERS.keys
-
   def self.match(digit)
     DIGITS_TO_NUMBERS[digit]
   end

@@ -13,6 +13,7 @@ describe 'DigitParser' do
       "  |  | _|  | _||_|  ||_| _|\n"
 
     lines = parser.parse_text text
+
     expect(lines.size).to eq(2)
     expect(lines[0]).to eq(
       ["    _  _     _  _  _  _  _ ",
@@ -32,6 +33,7 @@ describe 'DigitParser' do
              "  ||_  _|  | _||_|  ||_| _|"]
 
     digits = parser.parse_lines lines
+
     expect(digits.size).to eq(9)
     expect(digits[0]).to eq(
       [[' ',' ',' '],
@@ -66,6 +68,7 @@ describe 'DigitParser' do
              "  ||_ |_|  | _||_|| ||_| _|"]
 
     result = parser.build_result(lines)
+
     expect(result.digits).to eq('1??456?89')
   end
 

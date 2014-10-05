@@ -19,10 +19,10 @@ class ParseResult
   end
 
   def to_s
-    if @checksum_valid
+    if @checksum_valid   # Checksum can only be valid if all chars are valid (no ?s)
       @digits
     else
-      @digits + (@all_chars_valid? " ERR" : " ILL")
+      @digits + (@all_chars_valid? " ERR" : " ILL")  # ERR = checksum error, ILL = some digits couldn't be parsed
     end
   end
 
