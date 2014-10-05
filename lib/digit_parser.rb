@@ -21,4 +21,13 @@ class DigitParser
     Digit.match(digit)
   end
 
+  def parse(text)
+    line_groups = parse_text(text)
+    result = []
+    line_groups.each { |x|
+      result << parse_lines(x).inject("") { |value, digit| value + parse_digit(digit).to_s }
+    }
+    result
+  end
+
 end
