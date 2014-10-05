@@ -27,11 +27,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-nav (0.2.4)
-      pry (>= 0.9.10, < 0.11.0)
-    pry-remote (0.1.8)
-      pry (~> 0.9)
-      slop (~> 3.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
@@ -59,8 +54,5 @@ PLATFORMS
 DEPENDENCIES
   guard
   guard-rspec
-  pry
-  pry-nav
-  pry-remote
   rake
   rspec
