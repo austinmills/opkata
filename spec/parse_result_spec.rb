@@ -46,5 +46,16 @@ class ParseResultSpec
       expect(result.checksum_valid).to eq(false)
     end
 
+    it 'should correctly output result string and status if applicable' do
+      valid_result = ParseResult.new("457508000")
+      expect(valid_result.to_s).to eq("457508000")
+
+      bad_checksum_result = ParseResult.new("664371495")
+      expect(bad_checksum_result.to_s).to eq("664371495 ERR")
+
+      invalid_digits_result = ParseResult.new("86110??36")
+      expect(invalid_digits_result.to_s).to eq("86110??36 ILL")
+    end
+
   end
 end
