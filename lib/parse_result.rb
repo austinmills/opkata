@@ -1,6 +1,7 @@
 class ParseResult
 
   attr_reader :digits, :all_chars_valid, :checksum_valid
+  attr_accessor :alternatives
 
   def initialize(digits)
     @digits = digits

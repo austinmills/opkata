@@ -72,5 +72,78 @@ describe 'DigitParser' do
     expect(result.digits).to eq('1??456?89')
   end
 
+  it 'should find one valid permutation of a 1' do
+    parser = DigitParser.new
+    one_digit =
+        [[' ',' ',' '],
+         [' ',' ','|'],
+         [' ',' ','|']]
+
+    permutations = parser.permute_digit(one_digit)
+
+    expect(permutations).to eq([7])
+  end
+
+  it 'should find two valid permutations of an 8' do
+    parser = DigitParser.new
+    eight_digit =
+        [[' ','_',' '],
+        ['|','_','|'],
+        ['|','_','|']]
+
+    permutations = parser.permute_digit(eight_digit)
+
+    expect(permutations).to eq([0,6,9])
+
+  end
+
+  it 'should find the correct valid permutations for an illegible character' do
+    parser = DigitParser.new
+    invalid_digit =
+        [[' ',' ',' '],
+        ['|',' ','|'],
+        ['|','_','|']]
+
+    permutations = parser.permute_digit(invalid_digit)
+
+    expect(permutations).to eq([0])
+  end
+
+  it 'should find an alternate valid value for an illegible ParseResult' do
+    parser  = DigitParser.new
+    result = ParseResult.new('0?0000051')
+
+    lines =
+      [" _     _  _  _  _  _  _    ",
+       "| || || || || || || ||_   |",
+       "|_||_||_||_||_||_||_| _|  |"]
+
+    digit_array = parser.parse_lines(lines)
+
+
+    expect(result.checksum_valid).to eq(false)
+
+    result_with_alts = parser.find_alternate_values(result, digit_array)
+    expect(result_with_alts.alternatives).to eq(['000000051'])
+  end
+
+  it 'should find an alternate valid value for a bad ParseResult' do
+    parser  = DigitParser.new
+    result = ParseResult.new('555555555')
+
+    lines =
+      [" _  _  _  _  _  _  _  _  _ ",
+       "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
+       " _| _| _| _| _| _| _| _| _|"]
+
+    digit_array = parser.parse_lines(lines)
+
+    expect(result.checksum_valid).to eq(false)
+
+    result_with_alts = parser.find_alternate_values(result, digit_array)
+    expect(result_with_alts.alternatives).to eq(['559555555','555655555'])
+
+  end
+
 end
 
